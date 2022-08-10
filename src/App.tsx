@@ -1,9 +1,20 @@
-function App() {
+import React from "react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import { Dashboard, Register, Login} from "./pages"
 
+function App() {
   return (
-    <div className="App">
-      app
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/login" element={<Dashboard />} />
+        <Route path="/Register" element={<Dashboard/>}/>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
