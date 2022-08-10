@@ -13,8 +13,8 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/login" element={<Dashboard />} />
-        <Route path="/Register" element={<Dashboard/>}/>
+        <Route path="/login" element={<Login />} />
+        <Route path="/Register" element={<Register/>}/>
       </Routes>
     </BrowserRouter>
   )
