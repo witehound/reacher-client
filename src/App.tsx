@@ -5,7 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 import { Dashboard, Register, Login } from "./pages"
-import { Header} from "./components"
+import { Header } from "./components"
 
 function App() {
   return (
