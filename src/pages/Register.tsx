@@ -3,6 +3,7 @@ import { FaUser } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import register, { reset } from "../features/authSlice"
 
 const Register = () => {
   const [formData, seFormData] = useState({
