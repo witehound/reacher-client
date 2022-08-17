@@ -1,31 +1,26 @@
 import { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
-import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { register, reset } from "../features/authSlice";
 import Spinner from "../components/Spinner";
+import { register } from "../api";
 
-const Register = () => {
+const Register = ({ setUser , user} : any) => {
   const [formData, seFormData] = useState({
     name: "",
     email: "",
     password: "",
     password2: "",
   });
+  const { name, email, password, password2 } = formData;
 
   const navigate = useNavigate();
-  const dispatch = useDispatch<any>();
-
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state: any) => state.auth
-  );
 
   const handleInputChange = (e: any) => {
     seFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handeOnSubmit: any = (e: Event) => {
+  const handeOnSubmit: any = async (e: Event) => {
     e.preventDefault();
     if (password != password2) {
       toast.error("Passwords dont match");
@@ -35,28 +30,13 @@ const Register = () => {
         email,
         password,
       };
-
-      dispatch(register(userData));
+      const user = await register(userData)
+      localStorage.setItem('items', JSON.stringify(user.data));
+      navigate("/")
     }
   };
 
-  const { name, email, password, password2 } = formData;
 
-
-  if (isLoading) {
-    return <Spinner/>
-  }
-
-  useEffect(() => {
-    if (isError) {
-      toast.error(message);
-    }
-    if (isSuccess || user) {
-      navigate("/");
-    }
-
-    dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   return (
     <>
@@ -107,7 +87,7 @@ const Register = () => {
               className="form-control"
               id="password2"
               name="password2"
-              value={password}
+              value={password2}
               placeholder="confirm password"
               onChange={handleInputChange}
             />

@@ -1,7 +1,10 @@
 import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa"
 import { Link } from "react-router-dom"
 
-const Header = () => {
+
+
+
+const Header = ({ setUser , user} : any) => {
   return <header className="header">
     <div className="logo">
       <Link to="/">
@@ -15,7 +18,7 @@ const Header = () => {
         </Link>
       </li>
       <li>
-        <Link to="/register">
+        <Link to="/signup">
           <FaUser/> Register
         </Link>
       </li>
