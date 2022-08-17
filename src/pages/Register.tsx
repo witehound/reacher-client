@@ -1,26 +1,42 @@
 import { useState, useEffect } from "react";
 import { FaUser } from "react-icons/fa";
-import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import register, { reset } from "../features/authSlice"
+import Spinner from "../components/Spinner";
+import { register } from "../api";
 
-const Register = () => {
+const Register = ({ setUser , user} : any) => {
   const [formData, seFormData] = useState({
     name: "",
     email: "",
     password: "",
     password2: "",
   });
-
-  const handleInputChange = (e : any) => {
-    seFormData((prev) => ({...prev, [e.target.name] : e.target.value}))
-  };
-  const handeOnSubmit : any = (e : Event) => {
-    e.preventDefault()
-  };
-
   const { name, email, password, password2 } = formData;
+
+  const navigate = useNavigate();
+
+  const handleInputChange = (e: any) => {
+    seFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handeOnSubmit: any = async (e: Event) => {
+    e.preventDefault();
+    if (password != password2) {
+      toast.error("Passwords dont match");
+    } else {
+      const userData = {
+        name,
+        email,
+        password,
+      };
+      const user = await register(userData)
+      localStorage.setItem('items', JSON.stringify(user.data));
+      navigate("/")
+    }
+  };
+
+
 
   return (
     <>
@@ -71,13 +87,15 @@ const Register = () => {
               className="form-control"
               id="password2"
               name="password2"
-              value={password}
+              value={password2}
               placeholder="confirm password"
               onChange={handleInputChange}
             />
           </div>
           <div className="form-group">
-            <button type="submit" className="btn btn-block">Submit</button>
+            <button type="submit" className="btn btn-block">
+              Submit
+            </button>
           </div>
         </form>
       </section>
