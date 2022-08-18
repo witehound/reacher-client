@@ -1,20 +1,39 @@
 import { useState, useEffect } from "react";
 import { FaSignInAlt } from "react-icons/fa";
+import { loginUser } from "../api";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const Login = () => {
+const Login = ({ setUser, user }: any) => {
   const [formData, seFormData] = useState({
     email: "",
     password: "",
   });
 
+  const { password , email } = formData
+
+  const navigate = useNavigate();
+
   const handleInputChange = (e: any) => {
     seFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-  const handeOnSubmit: any = (e: Event) => {
-    e.preventDefault();
-  };
 
-  const { email, password } = formData;
+  const handeOnSubmit: any = async (e: Event) => {
+    e.preventDefault();
+    const userData = {
+      email,
+      password
+    }
+    const user = await loginUser(userData);
+    if (user.status == 200) {
+      localStorage.setItem("items", JSON.stringify(user.data));
+      setUser(user.data);
+      navigate("/");
+      toast.success("Succesfully registered");
+    } else {
+      toast.error("Failed to register user");
+    }
+  };
 
   return (
     <>
