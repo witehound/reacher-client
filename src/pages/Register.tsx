@@ -31,11 +31,16 @@ const Register = ({ setUser , user} : any) => {
         password,
       };
       const user = await register(userData)
-      localStorage.setItem('items', JSON.stringify(user.data));
+
+      if (user.status == 200) {
+        localStorage.setItem('items', JSON.stringify(user.data));
+      setUser(user.data)
       navigate("/")
-
-
-      //add loginn
+      toast.success("Succesfully registered")
+      } else {
+        toast.error("Failed to register user");
+      }
+      
     }
   };
 

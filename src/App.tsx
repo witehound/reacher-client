@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Dashboard, Register, Login } from "./pages";
 import { Header } from "./components";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const navigate = useNavigate()
   const [user, setUser] = useState<any>({});
 
   const tempUser = JSON.parse(localStorage.getItem('items') || "")
