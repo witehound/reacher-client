@@ -33,6 +33,9 @@ const Register = ({ setUser , user} : any) => {
       const user = await register(userData)
       localStorage.setItem('items', JSON.stringify(user.data));
       navigate("/")
+
+
+      //add loginn
     }
   };
 
