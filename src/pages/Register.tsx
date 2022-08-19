@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
 import { register } from "../api";
 
-const Register = ({ setUser , user} : any) => {
+const Register = ({ setUser, user }: any) => {
   const [formData, seFormData] = useState({
     name: "",
     email: "",
@@ -30,21 +30,18 @@ const Register = ({ setUser , user} : any) => {
         email,
         password,
       };
-      const user = await register(userData)
+      const user = await register(userData);
 
       if (user.status == 200) {
-        localStorage.setItem('items', JSON.stringify(user.data));
-      setUser(user.data)
-      navigate("/")
-      toast.success("Succesfully registered")
+        localStorage.setItem("items", JSON.stringify(user.data));
+        setUser(user.data);
+        navigate("/");
+        toast.success("Succesfully registered");
       } else {
         toast.error("Failed to register user");
       }
-      
     }
   };
-
-
 
   return (
     <>
