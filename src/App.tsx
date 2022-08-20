@@ -21,25 +21,18 @@ function App() {
       <BrowserRouter>
         <Header setUser={setUser} user={user} />
         <Routes>
-          {user ? (
-            <Route path="/" element={<Dashboard />} />
-          ) : (
-            <Navigate to="login" />
-          )}
-          {!user && (
+            <Route
+              path="/"
+              element={user ? <Dashboard /> : <Navigate to="login" />}
+            />
             <Route
               path="/signup"
-              element={<Register setUser={setUser} user={user} />}
+              element={ !user ?  <Register setUser={setUser} user={user} /> : <Navigate to="/" />}
             />
-          )}
-          {!user ? (
-            <Route path="/login" element={<Login />} />
-          )
-            : 
-            (<Navigate to="/" />)
-          }
-
-          
+          <Route
+            path="/login"
+            element={!user ? <Login /> : <Navigate to="/" />}
+          />
         </Routes>
       </BrowserRouter>
       <ToastContainer />

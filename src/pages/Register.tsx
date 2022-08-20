@@ -14,6 +14,8 @@ const Register = ({ setUser, user }: any) => {
   });
   const { name, email, password, password2 } = formData;
 
+  ///comment
+  
   const navigate = useNavigate();
 
   const handleInputChange = (e: any) => {
