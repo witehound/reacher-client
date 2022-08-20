@@ -21,14 +21,20 @@ function App() {
       <BrowserRouter>
         <Header setUser={setUser} user={user} />
         <Routes>
-            <Route
-              path="/"
-              element={user ? <Dashboard /> : <Navigate to="login" />}
-            />
-            <Route
-              path="/signup"
-              element={ !user ?  <Register setUser={setUser} user={user} /> : <Navigate to="/" />}
-            />
+          <Route
+            path="/"
+            element={user ? <Dashboard user={user} /> : <Navigate to="login" />}
+          />
+          <Route
+            path="/signup"
+            element={
+              !user ? (
+                <Register setUser={setUser} user={user} />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
+          />
           <Route
             path="/login"
             element={!user ? <Login /> : <Navigate to="/" />}

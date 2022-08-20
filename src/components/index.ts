@@ -1,3 +1,4 @@
 import Header from "./Header"
+import NewGoal from "./NewGoal"
 
-export { Header }
+export { Header, NewGoal }
