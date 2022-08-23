@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+//add more loigc
+
 const NewGoal = () => {
   const [text, setText] = useState("");
 
